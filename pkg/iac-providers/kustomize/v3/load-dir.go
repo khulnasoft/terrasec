@@ -1,5 +1,3 @@
-
-
 package kustomizev3
 
 import (

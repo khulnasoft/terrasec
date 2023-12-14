@@ -1,5 +1,3 @@
-
-
 package results
 
 // NewViolationStore returns a new violation store

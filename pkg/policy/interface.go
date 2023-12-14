@@ -1,5 +1,3 @@
-
-
 package policy
 
 // Engine Policy Engine interface

@@ -1,5 +1,3 @@
-
-
 package store
 
 // ResourceTypes holds mapping for CFT resource types to TF types

@@ -1,5 +1,3 @@
-
-
 package server_test
 
 import (
@@ -10,25 +8,25 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/khulnasoft/terrasec/pkg/utils"
+	serverUtils "github.com/khulnasoft/terrasec/test/e2e/server"
+	"github.com/khulnasoft/terrasec/test/helper"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
 	"github.com/onsi/gomega/gexec"
-	"github.com/khulnasoft/terrasec/pkg/utils"
-	serverUtils "github.com/khulnasoft/terrasec/test/e2e/server"
-	"github.com/khulnasoft/terrasec/test/helper"
 )
 
 const (
-	host                   string = "http://localhost"
-	defaultPort            int    = 9010
+	host                  string = "http://localhost"
+	defaultPort           int    = 9010
 	terrasecConfigEnvName string = "TERRASEC_CONFIG"
 	terrasecServerPort    string = "TERRASEC_SERVER_PORT"
-	configFileName         string = "configFile.toml"
+	configFileName        string = "configFile.toml"
 )
 
 var (
-	terrasecBinaryPath              string
+	terrasecBinaryPath               string
 	iacRootRelPath                   = filepath.Join("..", "test_data", "iac")
 	awsIacRelPath                    = filepath.Join(iacRootRelPath, "aws")
 	policyRootRelPath                = filepath.Join("..", "test_data", "policies")

@@ -1,5 +1,3 @@
-
-
 package opa
 
 import (
@@ -15,12 +13,12 @@ import (
 	"text/template"
 	"time"
 
-	"github.com/open-policy-agent/opa/ast"
-	"github.com/open-policy-agent/opa/rego"
 	"github.com/khulnasoft/terrasec/pkg/iac-providers/output"
 	"github.com/khulnasoft/terrasec/pkg/policy"
 	"github.com/khulnasoft/terrasec/pkg/results"
 	"github.com/khulnasoft/terrasec/pkg/utils"
+	"github.com/open-policy-agent/opa/ast"
+	"github.com/open-policy-agent/opa/rego"
 	"go.uber.org/zap"
 )
 

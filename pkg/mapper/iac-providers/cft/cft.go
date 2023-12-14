@@ -1,5 +1,3 @@
-
-
 package cft
 
 import (

@@ -1,5 +1,3 @@
-
-
 package armv1
 
 import (
@@ -16,9 +14,9 @@ import (
 	"gopkg.in/src-d/go-git.v4/plumbing"
 
 	"github.com/hashicorp/go-multierror"
-	"github.com/stretchr/testify/assert"
 	"github.com/khulnasoft/terrasec/pkg/iac-providers/output"
 	"github.com/khulnasoft/terrasec/pkg/utils"
+	"github.com/stretchr/testify/assert"
 )
 
 const (

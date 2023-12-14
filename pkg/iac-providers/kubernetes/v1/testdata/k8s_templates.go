@@ -1,5 +1,3 @@
-
-
 package testdata
 
 var (

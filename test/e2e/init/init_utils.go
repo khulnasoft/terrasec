@@ -1,13 +1,11 @@
-
-
 package init
 
 import (
 	"io"
 
+	"github.com/khulnasoft/terrasec/test/helper"
 	"github.com/onsi/gomega"
 	"github.com/onsi/gomega/gexec"
-	"github.com/khulnasoft/terrasec/test/helper"
 	"gopkg.in/src-d/go-git.v4"
 )
 

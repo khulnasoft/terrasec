@@ -1,14 +1,12 @@
-
-
 package scan
 
 import (
 	"io"
 	"path/filepath"
 
+	"github.com/khulnasoft/terrasec/test/helper"
 	"github.com/onsi/gomega"
 	"github.com/onsi/gomega/gexec"
-	"github.com/khulnasoft/terrasec/test/helper"
 )
 
 const (

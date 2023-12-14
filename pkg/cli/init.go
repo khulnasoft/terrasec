@@ -1,10 +1,8 @@
-
-
 package cli
 
 import (
-	"github.com/spf13/cobra"
 	"github.com/khulnasoft/terrasec/pkg/initialize"
+	"github.com/spf13/cobra"
 	"go.uber.org/zap"
 )
 

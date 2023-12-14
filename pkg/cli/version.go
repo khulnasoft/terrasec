@@ -1,12 +1,10 @@
-
-
 package cli
 
 import (
 	"fmt"
 
-	"github.com/spf13/cobra"
 	"github.com/khulnasoft/terrasec/pkg/version"
+	"github.com/spf13/cobra"
 )
 
 var versionCmd = &cobra.Command{

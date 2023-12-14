@@ -1,5 +1,3 @@
-
-
 package utils
 
 // MergeMaps merges two maps, the second map values overriding first map

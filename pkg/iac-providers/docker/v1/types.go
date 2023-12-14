@@ -1,5 +1,3 @@
-
-
 package dockerv1
 
 import "github.com/hashicorp/go-multierror"

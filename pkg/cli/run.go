@@ -1,5 +1,3 @@
-
-
 package cli
 
 import (
@@ -9,11 +7,11 @@ import (
 	"os"
 	"strings"
 
-	"github.com/mattn/go-isatty"
 	"github.com/khulnasoft/terrasec/pkg/downloader"
 	"github.com/khulnasoft/terrasec/pkg/runtime"
 	"github.com/khulnasoft/terrasec/pkg/utils"
 	"github.com/khulnasoft/terrasec/pkg/writer"
+	"github.com/mattn/go-isatty"
 	"go.uber.org/zap"
 )
 

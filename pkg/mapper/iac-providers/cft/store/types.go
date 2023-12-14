@@ -1,5 +1,3 @@
-
-
 package store
 
 // CFT equivalent TF resource types

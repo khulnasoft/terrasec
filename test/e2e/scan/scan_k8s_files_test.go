@@ -1,15 +1,13 @@
-
-
 package scan_test
 
 import (
 	"path/filepath"
 
+	scanUtils "github.com/khulnasoft/terrasec/test/e2e/scan"
+	"github.com/khulnasoft/terrasec/test/helper"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
-	scanUtils "github.com/khulnasoft/terrasec/test/e2e/scan"
-	"github.com/khulnasoft/terrasec/test/helper"
 )
 
 var _ = Describe("Scan is run for k8s directories and files", func() {

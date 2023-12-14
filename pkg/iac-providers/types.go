@@ -1,5 +1,3 @@
-
-
 package iacprovider
 
 // SupportedIacType data type for supported IaC provider

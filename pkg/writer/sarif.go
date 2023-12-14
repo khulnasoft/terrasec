@@ -1,5 +1,3 @@
-
-
 package writer
 
 import (
@@ -8,10 +6,10 @@ import (
 	"strings"
 
 	"github.com/go-errors/errors"
-	"github.com/owenrumney/go-sarif/v2/sarif"
 	"github.com/khulnasoft/terrasec/pkg/policy"
 	"github.com/khulnasoft/terrasec/pkg/utils"
 	"github.com/khulnasoft/terrasec/pkg/version"
+	"github.com/owenrumney/go-sarif/v2/sarif"
 	"go.uber.org/zap"
 )
 

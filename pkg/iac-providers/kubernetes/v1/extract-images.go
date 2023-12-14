@@ -1,14 +1,12 @@
-
-
 package k8sv1
 
 import (
 	"encoding/json"
 
 	yamltojson "github.com/ghodss/yaml"
-	"github.com/pkg/errors"
 	"github.com/khulnasoft/terrasec/pkg/iac-providers/output"
 	"github.com/khulnasoft/terrasec/pkg/utils"
+	"github.com/pkg/errors"
 	"go.uber.org/zap"
 	k8sappsv1 "k8s.io/api/apps/v1"
 	k8sbatchv1 "k8s.io/api/batch/v1"

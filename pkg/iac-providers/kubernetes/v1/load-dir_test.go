@@ -1,5 +1,3 @@
-
-
 package k8sv1
 
 import (

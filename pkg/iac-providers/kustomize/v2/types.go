@@ -1,5 +1,3 @@
-
-
 package kustomizev2
 
 // KustomizeV2 struct

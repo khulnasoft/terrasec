@@ -1,17 +1,15 @@
-
-
 package scan_test
 
 import (
 	"os"
 	"path/filepath"
 
+	scanUtils "github.com/khulnasoft/terrasec/test/e2e/scan"
+	"github.com/khulnasoft/terrasec/test/helper"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
 	"github.com/onsi/gomega/gexec"
-	scanUtils "github.com/khulnasoft/terrasec/test/e2e/scan"
-	"github.com/khulnasoft/terrasec/test/helper"
 )
 
 var _ = Describe("Scan Command using remote types", func() {

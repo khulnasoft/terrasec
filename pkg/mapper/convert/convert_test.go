@@ -1,5 +1,3 @@
-
-
 package convert
 
 import (

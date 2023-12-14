@@ -1,5 +1,3 @@
-
-
 package httpserver
 
 // APIHandler struct for http api server

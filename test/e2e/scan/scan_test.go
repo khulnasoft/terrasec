@@ -1,5 +1,3 @@
-
-
 package scan_test
 
 import (
@@ -10,20 +8,20 @@ import (
 	"os"
 	"path/filepath"
 
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
-	"github.com/onsi/gomega/gbytes"
-	"github.com/onsi/gomega/gexec"
 	"github.com/khulnasoft/terrasec/pkg/config"
 	"github.com/khulnasoft/terrasec/pkg/policy"
 	"github.com/khulnasoft/terrasec/pkg/utils"
 	scanUtils "github.com/khulnasoft/terrasec/test/e2e/scan"
 	"github.com/khulnasoft/terrasec/test/helper"
+	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/gomega"
+	"github.com/onsi/gomega/gbytes"
+	"github.com/onsi/gomega/gexec"
 )
 
 var (
 	session              *gexec.Session
-	terrasecBinaryPath  string
+	terrasecBinaryPath   string
 	iacRootRelPath       = filepath.Join("..", "test_data", "iac")
 	awsIacRelPath        = filepath.Join(iacRootRelPath, "aws")
 	k8sIacRelPath        = filepath.Join(iacRootRelPath, "k8s")

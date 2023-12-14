@@ -1,5 +1,3 @@
-
-
 package armv1
 
 import "github.com/hashicorp/go-multierror"

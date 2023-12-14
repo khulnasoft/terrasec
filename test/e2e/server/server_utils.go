@@ -1,5 +1,3 @@
-
-
 package server
 
 import (
@@ -11,10 +9,10 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/onsi/gomega"
-	"github.com/onsi/gomega/gexec"
 	"github.com/khulnasoft/terrasec/pkg/policy"
 	"github.com/khulnasoft/terrasec/test/helper"
+	"github.com/onsi/gomega"
+	"github.com/onsi/gomega/gexec"
 )
 
 const (

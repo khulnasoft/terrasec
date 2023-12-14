@@ -4,8 +4,8 @@ import (
 	"testing"
 
 	"github.com/google/uuid"
-	"github.com/stretchr/testify/assert"
 	"github.com/khulnasoft/terrasec/pkg/mapper/iac-providers/arm/types"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestLookUp(t *testing.T) {

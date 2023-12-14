@@ -1,5 +1,3 @@
-
-
 package config
 
 // Global initializes GlobalConfig struct

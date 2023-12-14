@@ -1,5 +1,3 @@
-
-
 package rego
 
 import (

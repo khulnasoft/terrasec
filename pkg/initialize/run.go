@@ -1,5 +1,3 @@
-
-
 package initialize
 
 import (

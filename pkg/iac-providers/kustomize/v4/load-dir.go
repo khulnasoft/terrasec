@@ -1,5 +1,3 @@
-
-
 package kustomizev4
 
 import (

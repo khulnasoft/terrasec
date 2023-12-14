@@ -1,5 +1,3 @@
-
-
 package config
 
 // Config holds the common resource config fields

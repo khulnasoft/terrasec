@@ -1,5 +1,3 @@
-
-
 package init_test
 
 import (
@@ -9,23 +7,23 @@ import (
 	"path/filepath"
 	"time"
 
+	"github.com/khulnasoft/terrasec/pkg/utils"
+	initUtil "github.com/khulnasoft/terrasec/test/e2e/init"
+	"github.com/khulnasoft/terrasec/test/helper"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
 	"github.com/onsi/gomega/gexec"
-	"github.com/khulnasoft/terrasec/pkg/utils"
-	initUtil "github.com/khulnasoft/terrasec/test/e2e/init"
-	"github.com/khulnasoft/terrasec/test/helper"
 	"gopkg.in/src-d/go-git.v4"
 )
 
 var (
-	initCommand            = "init"
-	defaultPolicyRepoPath  = filepath.Join(utils.GetHomeDir(), ".terrasec")
+	initCommand           = "init"
+	defaultPolicyRepoPath = filepath.Join(utils.GetHomeDir(), ".terrasec")
 	terrasecGitURL        = "https://github.com/khulnasoft/terrasec.git"
 	terrasecDefaultBranch = "master"
 	terrasecConfigEnvName = "TERRASEC_CONFIG"
-	kaiMoneyGitURL         = "https://github.com/tenable/KaiMonkey.git"
+	kaiMoneyGitURL        = "https://github.com/tenable/KaiMonkey.git"
 
 	testPolicyRepoPath = filepath.Join(utils.GetHomeDir(), ".terrasec-test")
 	testRegoSubDirPath = filepath.Join(testPolicyRepoPath, "pkg", "policies", "opa", "rego")

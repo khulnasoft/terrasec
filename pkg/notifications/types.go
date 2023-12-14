@@ -1,5 +1,3 @@
-
-
 package notifications
 
 // SupportedNotifierType data type for supported IaC provider

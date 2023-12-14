@@ -1,5 +1,3 @@
-
-
 package cftv1
 
 import (

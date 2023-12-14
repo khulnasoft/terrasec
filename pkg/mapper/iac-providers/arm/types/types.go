@@ -1,5 +1,3 @@
-
-
 package types
 
 // ResourceTypes holds mapping for ARM resource types to TF types

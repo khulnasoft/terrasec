@@ -1,5 +1,3 @@
-
-
 package server_test
 
 import (
@@ -11,14 +9,14 @@ import (
 	"os"
 	"path/filepath"
 
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
-	"github.com/onsi/gomega/gbytes"
-	"github.com/onsi/gomega/gexec"
 	"github.com/khulnasoft/terrasec/pkg/iac-providers/output"
 	"github.com/khulnasoft/terrasec/pkg/policy"
 	serverUtils "github.com/khulnasoft/terrasec/test/e2e/server"
 	"github.com/khulnasoft/terrasec/test/helper"
+	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/gomega"
+	"github.com/onsi/gomega/gbytes"
+	"github.com/onsi/gomega/gexec"
 )
 
 var _ = Describe("Server Remote Scan", func() {

@@ -1,5 +1,3 @@
-
-
 package validatingwebhook
 
 import (
@@ -10,9 +8,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/pelletier/go-toml"
 	"github.com/khulnasoft/terrasec/pkg/config"
 	"github.com/khulnasoft/terrasec/pkg/utils"
+	"github.com/pelletier/go-toml"
 )
 
 // CreateTerrasecConfigFile creates a config file with test policy path

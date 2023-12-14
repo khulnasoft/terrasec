@@ -1,5 +1,3 @@
-
-
 package scan_test
 
 import (

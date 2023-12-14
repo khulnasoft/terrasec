@@ -1,5 +1,3 @@
-
-
 package httpserver
 
 // APIServer struct for http api server

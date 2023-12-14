@@ -1,5 +1,3 @@
-
-
 package cli
 
 import (
@@ -9,10 +7,10 @@ import (
 	"os"
 	"strings"
 
-	"github.com/spf13/cobra"
 	"github.com/khulnasoft/terrasec/pkg/config"
 	"github.com/khulnasoft/terrasec/pkg/logging"
 	"github.com/khulnasoft/terrasec/pkg/utils"
+	"github.com/spf13/cobra"
 	"go.uber.org/zap"
 )
 

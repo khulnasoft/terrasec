@@ -1,5 +1,3 @@
-
-
 package helper
 
 import (
@@ -17,12 +15,12 @@ import (
 
 	"go.uber.org/zap"
 
-	"github.com/onsi/ginkgo"
-	"github.com/onsi/gomega"
-	"github.com/onsi/gomega/gexec"
 	"github.com/khulnasoft/terrasec/pkg/policy"
 	"github.com/khulnasoft/terrasec/pkg/results"
 	"github.com/khulnasoft/terrasec/pkg/utils"
+	"github.com/onsi/ginkgo"
+	"github.com/onsi/gomega"
+	"github.com/onsi/gomega/gexec"
 	"gopkg.in/yaml.v3"
 )
 

@@ -1,5 +1,3 @@
-
-
 package httputils
 
 import "net/http"

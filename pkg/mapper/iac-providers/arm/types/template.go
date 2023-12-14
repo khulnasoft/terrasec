@@ -1,5 +1,3 @@
-
-
 package types
 
 // Template represents the base structure of an ARM template.

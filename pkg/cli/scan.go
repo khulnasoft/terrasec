@@ -1,14 +1,12 @@
-
-
 package cli
 
 import (
 	"fmt"
 	"strings"
 
-	"github.com/spf13/cobra"
 	iacProvider "github.com/khulnasoft/terrasec/pkg/iac-providers"
 	"github.com/khulnasoft/terrasec/pkg/policy"
+	"github.com/spf13/cobra"
 	"go.uber.org/zap"
 )
 

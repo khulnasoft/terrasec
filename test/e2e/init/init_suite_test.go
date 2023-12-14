@@ -1,5 +1,3 @@
-
-
 package init_test
 
 import (

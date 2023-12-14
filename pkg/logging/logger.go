@@ -1,5 +1,3 @@
-
-
 package logging
 
 import (
@@ -15,7 +13,7 @@ import (
 )
 
 const (
-	logFileName                   = "terrasec.log"
+	logFileName                  = "terrasec.log"
 	terrasecZapSink              = "terrasec-winfile-sink"
 	terrasecZapSinkWithSeparator = terrasecZapSink + ":///"
 )

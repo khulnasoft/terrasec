@@ -1,5 +1,3 @@
-
-
 package tfplan
 
 // TFPlan implements the IacProvider interface

@@ -1,5 +1,3 @@
-
-
 package webhook
 
 // Webhook implements the Notifier interface

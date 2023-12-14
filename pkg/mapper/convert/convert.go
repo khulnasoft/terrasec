@@ -1,5 +1,3 @@
-
-
 package convert
 
 // ToFloat64 looks for key in src and converts the value to a string type.

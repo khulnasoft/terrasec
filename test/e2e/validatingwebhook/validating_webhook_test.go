@@ -1,5 +1,3 @@
-
-
 package validatingwebhook_test
 
 import (
@@ -11,15 +9,15 @@ import (
 	"path/filepath"
 	"time"
 
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
-	"github.com/onsi/gomega/gbytes"
-	"github.com/onsi/gomega/gexec"
 	"github.com/khulnasoft/terrasec/pkg/config"
 	"github.com/khulnasoft/terrasec/pkg/utils"
 	"github.com/khulnasoft/terrasec/test/e2e/server"
 	"github.com/khulnasoft/terrasec/test/e2e/validatingwebhook"
 	"github.com/khulnasoft/terrasec/test/helper"
+	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/gomega"
+	"github.com/onsi/gomega/gbytes"
+	"github.com/onsi/gomega/gexec"
 	admissionv1 "k8s.io/api/admissionregistration/v1"
 	k8serr "k8s.io/apimachinery/pkg/api/errors"
 )
@@ -32,14 +30,14 @@ const (
 )
 
 var (
-	kubeClient          *validatingwebhook.KubernetesClient
+	kubeClient         *validatingwebhook.KubernetesClient
 	terrasecBinaryPath string
-	certFileAbsPath     string
-	privKeyFileAbsPath  string
-	policyRootRelPath   = filepath.Join("..", "test_data", "policies")
-	webhookYamlRelPath  = filepath.Join("test-data", "yamls", "webhook.yaml")
-	podYamlRelPath      = filepath.Join("test-data", "yamls", "pod.yaml")
-	serviceYamlPath     = filepath.Join("test-data", "yamls", "service.yaml")
+	certFileAbsPath    string
+	privKeyFileAbsPath string
+	policyRootRelPath  = filepath.Join("..", "test_data", "policies")
+	webhookYamlRelPath = filepath.Join("test-data", "yamls", "webhook.yaml")
+	podYamlRelPath     = filepath.Join("test-data", "yamls", "pod.yaml")
+	serviceYamlPath    = filepath.Join("test-data", "yamls", "service.yaml")
 )
 
 var _ = Describe("ValidatingWebhook", func() {

@@ -1,5 +1,3 @@
-
-
 package core
 
 import "github.com/khulnasoft/terrasec/pkg/iac-providers/output"

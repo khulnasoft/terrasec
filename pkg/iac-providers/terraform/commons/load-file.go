@@ -1,5 +1,3 @@
-
-
 package commons
 
 import (
@@ -9,8 +7,8 @@ import (
 
 	"github.com/hashicorp/hcl/v2"
 	hclConfigs "github.com/hashicorp/terraform/configs"
-	"github.com/spf13/afero"
 	"github.com/khulnasoft/terrasec/pkg/iac-providers/output"
+	"github.com/spf13/afero"
 	"go.uber.org/zap"
 )
 
