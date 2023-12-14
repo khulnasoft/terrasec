@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: terrasec
+spec:
+  replicas: 1
+  template:
+    spec:
+      initContainers:
+        - name: git-cloner
+          image: alpine/git
+          args:
+            - clone
+            - --single-branch
+            - --branch=master
+            - https://github.com/khulnasoft/terrasec.git
+            - /data
+          volumeMounts:
+            - mountPath: /data
+              name: terrasec-data-sync
+      containers:
+      - name: terrasec-server
+        image: khulnasoft/terrasec:1.16.0
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "0.5"
+        ports:
+        - containerPort: 9010
+        livenessProbe:
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          httpGet:
+            path: /health
+            port: 9010
+            scheme: http
+        volumeMounts:
+        - name: terrasec-data-sync
+          mountPath: /home/terrasec/.terrasec
+        - mountPath: /data/config
+          name: terrasec-config
+          readOnly: true
+        command: ["/bin/sh", "-c"]
+        args:
+        - >
+          terrasec server -l debug -c /data/config/config.toml
+      volumes:
+        #add a configmap for the terrasec config.toml file
+        - name: terrasec-config
+          configMap:
+            name: terrasec-config
+        - name: terrasec-data-sync
+          emptyDir: {}
