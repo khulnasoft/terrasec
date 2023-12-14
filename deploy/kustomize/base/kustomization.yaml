@@ -1,0 +1,12 @@
+resources:
+  - deployment.yaml
+
+namespace: <TERRASEC_NAMESPACE>
+
+commonLabels:
+  app: terrasec
+
+configMapGenerator:
+  - name: terrasec-config
+    files:
+      - config.toml=config/config.toml
