@@ -1,0 +1,103 @@
+
+
+package commons
+
+import (
+	"encoding/json"
+	"os"
+	"reflect"
+	"regexp"
+	"strings"
+
+	"github.com/hashicorp/hcl/v2/hclsyntax"
+	"go.uber.org/zap"
+)
+
+var (
+	// reference patterns
+	localRefPattern = regexp.MustCompile(`(\$\{)?local\.(?P<name>\w*)(\})?`)
+)
+
+// isLocalRef returns true if the given string is a local value reference
+func isLocalRef(attrVal string) bool {
+	return localRefPattern.MatchString(attrVal)
+}
+
+// getLocalName returns the actual local value name as configured in IaC. It
+// trims of "${local." prefix and "}" suffix and returns the local value name
+func getLocalName(localRef string) (string, string) {
+
+	// 1. extract the exact local value reference from the string
+	localExpr := localRefPattern.FindString(localRef)
+
+	// 2. extract local value name from local value reference
+	match := localRefPattern.FindStringSubmatch(localRef)
+	result := make(map[string]string)
+	for i, name := range localRefPattern.SubexpNames() {
+		if i != 0 && name != "" {
+			result[name] = match[i]
+		}
+	}
+	localName := result["name"]
+
+	zap.S().Debugf("extracted local value name %q from reference %q", localName, localRef)
+	return localName, localExpr
+}
+
+// ResolveLocalRef returns the local value as configured in IaC config in module
+func (r *RefResolver) ResolveLocalRef(localRef, callerRef string) interface{} {
+
+	// get local name from localRef
+	localName, localExpr := getLocalName(localRef)
+
+	// check if local name exists in the map of locals read from IaC
+	localAttr, present := r.Config.Module.Locals[localName]
+	if !present {
+		zap.S().Debugf("local name: %q, ref: %q not present in locals", localName, localRef)
+		return localRef
+	}
+
+	// read source file
+	fileBytes, err := os.ReadFile(localAttr.DeclRange.Filename)
+	if err != nil {
+		zap.S().Errorf("failed to read terraform IaC file '%s'. error: '%v'", localAttr.DeclRange.Filename, err)
+		return localRef
+	}
+
+	// extract values from attribute expressions as golang interface{}
+	c := converter{bytes: fileBytes}
+	val, _, err := c.convertExpression(localAttr.Expr.(hclsyntax.Expression))
+	if err != nil {
+		zap.S().Errorf("failed to convert expression '%v', ref: '%v'", localAttr.Expr, localRef)
+		return localRef
+	}
+
+	valKind := reflect.TypeOf(val).Kind()
+
+	// replace the local value reference string with actual value
+	if valKind == reflect.String || valKind == reflect.Map {
+		valStr := ""
+
+		if valKind == reflect.Map {
+			data, err := json.Marshal(val)
+			if err != nil {
+				zap.S().Errorf("failed to convert expression '%v', ref: '%v'", localAttr.Expr, localRef)
+				return localRef
+			}
+			valStr = string(data)
+		} else {
+			valStr = val.(string)
+		}
+
+		resolvedVal := strings.Replace(localRef, localExpr, valStr, 1)
+		if callerRef != "" && strings.Contains(resolvedVal, callerRef) {
+			zap.S().Debugf("resolved str local value ref: '%v', value: '%v'", localRef, resolvedVal)
+			return resolvedVal
+		}
+		return r.ResolveStrRef(resolvedVal, localRef)
+	}
+
+	// return extracted value
+	zap.S().Debugf("resolved local value ref: '%v', value: '%v'", localRef, val)
+	return val
+}

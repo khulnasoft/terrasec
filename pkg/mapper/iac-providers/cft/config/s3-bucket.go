@@ -1,0 +1,162 @@
+
+
+package config
+
+import (
+	"fmt"
+	"strings"
+
+	"github.com/awslabs/goformation/v7/cloudformation/s3"
+	"github.com/khulnasoft/terrasec/pkg/mapper/iac-providers/cft/functions"
+)
+
+const (
+	// PublicAccessBlock represents subresource aws_s3_bucket_public_access_block for attribute PublicAccessBlockConfiguration
+	PublicAccessBlock = "PublicAccessBlock"
+)
+
+// S3BucketConfig holds config for aws_s3_bucket
+type S3BucketConfig struct {
+	Config
+	Bucket               string                       `json:"bucket"`
+	AccessControl        string                       `json:"acl"`
+	BucketEncryption     []ServerSideEncryptionConfig `json:"server_side_encryption_configuration,omitempty"`
+	Logging              []LoggingConfig              `json:"logging"`
+	WebsiteConfiguration []WebsiteConfig              `json:"website"`
+	Versioning           []VersioningConfig           `json:"versioning,omitempty"`
+}
+
+// ServerSideEncryptionConfig holds config for server_side_encryption_configuration
+type ServerSideEncryptionConfig struct {
+	ServerSideEncryptionConfiguration []ServerSideEncryptionRule `json:"rule"`
+}
+
+// ServerSideEncryptionRule holds config for rule
+type ServerSideEncryptionRule struct {
+	ServerSideEncryptionByDefault []DefaultSSEConfig `json:"apply_server_side_encryption_by_default,omitempty"`
+	BucketKeyEnabled              bool               `json:"bucket_key_enabled"`
+}
+
+// DefaultSSEConfig holds config for apply_server_side_encryption_by_default
+type DefaultSSEConfig struct {
+	KMSMasterKeyID string `json:"kms_master_key_id"`
+	SSEAlgorithm   string `json:"sse_algorithm"`
+}
+
+// LoggingConfig holds config for logging
+type LoggingConfig struct {
+	DestinationBucketName string `json:"target_bucket"`
+	LogFilePrefix         string `json:"target_prefix"`
+}
+
+// WebsiteConfig holds config for website
+type WebsiteConfig struct {
+	RedirectAllRequestsTo interface{} `json:"redirect_all_requests_to"`
+	RoutingRules          interface{} `json:"routing_rules"`
+	ErrorDocument         string      `json:"error_document"`
+	IndexDocument         string      `json:"index_document"`
+}
+
+// VersioningConfig holds config for versioning
+type VersioningConfig struct {
+	Status bool `json:"enabled"`
+}
+
+// S3BucketPublicAccessBlockConfig holds config for aws_s3_bucket_public_access_block
+type S3BucketPublicAccessBlockConfig struct {
+	Config
+	Bucket                string `json:"bucket"`
+	BlockPublicAcls       bool   `json:"block_public_acls"`
+	BlockPublicPolicy     bool   `json:"block_public_policy"`
+	IgnorePublicAcls      bool   `json:"ignore_public_acls"`
+	RestrictPublicBuckets bool   `json:"restrict_public_buckets"`
+}
+
+// GetS3BucketConfig returns config for aws_s3_bucket
+func GetS3BucketConfig(s *s3.Bucket) []AWSResourceConfig {
+	resourceConfigs := make([]AWSResourceConfig, 0)
+
+	cf := S3BucketConfig{
+		Config: Config{
+			Name: functions.GetVal(s.BucketName),
+			Tags: s.Tags,
+		},
+		Bucket:        functions.GetVal(s.BucketName),
+		AccessControl: strings.ToLower(functions.GetVal(s.AccessControl)),
+	}
+
+	// add sse configurations
+	if s.BucketEncryption != nil {
+		sseRules := make([]ServerSideEncryptionRule, 0)
+		for _, sseRule := range s.BucketEncryption.ServerSideEncryptionConfiguration {
+			if sseRule.ServerSideEncryptionByDefault != nil {
+				defaultConfig := DefaultSSEConfig{
+					KMSMasterKeyID: functions.GetVal(sseRule.ServerSideEncryptionByDefault.KMSMasterKeyID),
+					SSEAlgorithm:   sseRule.ServerSideEncryptionByDefault.SSEAlgorithm,
+				}
+				sseRules = append(sseRules, ServerSideEncryptionRule{
+					ServerSideEncryptionByDefault: []DefaultSSEConfig{defaultConfig},
+				})
+			}
+		}
+		cf.BucketEncryption = []ServerSideEncryptionConfig{{
+			ServerSideEncryptionConfiguration: sseRules,
+		}}
+	}
+
+	// add logging configurations
+	if s.LoggingConfiguration != nil {
+		cf.Logging = []LoggingConfig{{
+			DestinationBucketName: functions.GetVal(s.LoggingConfiguration.DestinationBucketName),
+			LogFilePrefix:         functions.GetVal(s.LoggingConfiguration.LogFilePrefix),
+		}}
+	}
+
+	// add website configurations
+	if s.WebsiteConfiguration != nil {
+		cf.WebsiteConfiguration = []WebsiteConfig{{
+			IndexDocument:         functions.GetVal(s.WebsiteConfiguration.IndexDocument),
+			ErrorDocument:         functions.GetVal(s.WebsiteConfiguration.ErrorDocument),
+			RedirectAllRequestsTo: s.WebsiteConfiguration.RedirectAllRequestsTo,
+			RoutingRules:          s.WebsiteConfiguration.RoutingRules,
+		}}
+	}
+
+	// add versioning configurations
+	if s.VersioningConfiguration != nil {
+		var status bool
+		if s.VersioningConfiguration.Status == "Enabled" {
+			status = true
+		}
+		cf.Versioning = []VersioningConfig{{
+			Status: status,
+		}}
+	}
+
+	// add aws_s3_bucket
+	resourceConfigs = append(resourceConfigs, AWSResourceConfig{
+		Resource: cf,
+		Metadata: s.AWSCloudFormationMetadata,
+	})
+
+	// add aws_s3_bucket_public_access_block
+	if s.PublicAccessBlockConfiguration != nil {
+		resourceConfigs = append(resourceConfigs, AWSResourceConfig{
+			Resource: S3BucketPublicAccessBlockConfig{
+				Config: Config{
+					Name: functions.GetVal(s.BucketName),
+				},
+				Bucket:                fmt.Sprintf("aws_s3_bucket.%s", functions.GetVal(s.BucketName)),
+				BlockPublicAcls:       functions.GetVal(s.PublicAccessBlockConfiguration.BlockPublicAcls),
+				BlockPublicPolicy:     functions.GetVal(s.PublicAccessBlockConfiguration.BlockPublicPolicy),
+				IgnorePublicAcls:      functions.GetVal(s.PublicAccessBlockConfiguration.IgnorePublicAcls),
+				RestrictPublicBuckets: functions.GetVal(s.PublicAccessBlockConfiguration.RestrictPublicBuckets),
+			},
+			Metadata: s.AWSCloudFormationMetadata,
+			Type:     PublicAccessBlock,
+			Name:     functions.GetVal(s.BucketName),
+		})
+	}
+
+	return resourceConfigs
+}

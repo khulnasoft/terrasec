@@ -1,0 +1,13 @@
+
+
+package kustomizev4
+
+import (
+	"github.com/khulnasoft/terrasec/pkg/iac-providers/kustomize/commons"
+	"github.com/khulnasoft/terrasec/pkg/iac-providers/output"
+)
+
+// LoadIacFile is not supported for kustomize. Only loading directories that have kustomization.y(a)ml file are supported
+func (k *KustomizeV4) LoadIacFile(absRootPath string, options map[string]interface{}) (allResourcesConfig output.AllResourceConfigs, err error) {
+	return commons.LoadIacFile()
+}

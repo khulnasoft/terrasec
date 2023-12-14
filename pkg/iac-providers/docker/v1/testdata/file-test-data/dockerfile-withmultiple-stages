@@ -1,0 +1,8 @@
+# -------- builder stage -------- #
+FROM golang:alpine AS builder
+RUN go build main.go
+
+# -------- prod stage -------- #
+FROM alpine:3.14
+COPY --from=builder /go/bin/terrasec /go/bin/terrasec
+ENTRYPOINT ["/go/bin/main"]
