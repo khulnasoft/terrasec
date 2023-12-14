@@ -1,0 +1,6 @@
+Error: unknown command "inti" for "terrasec"
+
+Did you mean this?
+	init
+
+Run 'terrasec --help' for usage.

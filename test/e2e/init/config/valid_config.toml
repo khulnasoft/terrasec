@@ -1,0 +1,5 @@
+[policy]
+repo_url = "https://github.com/khulnasoft/terrasec.git"
+branch = "master"
+path = "~/.terrasec-test"
+rego_subdir = "pkg/policies/opa/rego"

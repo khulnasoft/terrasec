@@ -1,0 +1,6 @@
+Error: unknown command "servre" for "terrasec"
+
+Did you mean this?
+	server
+
+Run 'terrasec --help' for usage.

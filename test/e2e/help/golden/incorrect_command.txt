@@ -1,0 +1,2 @@
+Error: unknown command "test" for "terrasec"
+Run 'terrasec --help' for usage.

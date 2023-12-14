@@ -1,0 +1,6 @@
+Error: unknown command "scna" for "terrasec"
+
+Did you mean this?
+	scan
+
+Run 'terrasec --help' for usage.
