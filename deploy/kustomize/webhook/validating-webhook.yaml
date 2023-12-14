@@ -1,0 +1,27 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: terrasec.<TERRASEC_NAMESPACE>.svc
+  annotations:
+    terrasec-webhook: terrasec.<TERRASEC_NAMESPACE>.svc
+webhooks:
+  - name: terrasec.<TERRASEC_NAMESPACE>.svc
+    rules:
+    - apiGroups:
+      - "*"
+      apiVersions:
+        - "*"
+      operations:
+        - CREATE
+        - UPDATE
+      resources:
+        - "*"
+    failurePolicy: Fail
+    sideEffects: None
+    clientConfig:
+      service:
+        name: terrasec
+        namespace: <TERRASEC_NAMESPACE>
+        path: /v1/k8s/webhooks/<WEBHOOK_API_KEY>/scan/validate
+      caBundle: <CA_BUNDLE>
+    admissionReviewVersions: ["v1", "v1beta1"]

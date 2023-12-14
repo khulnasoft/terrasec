@@ -1,5 +1,5 @@
 FROM runatlantis/atlantis:v0.16.1
-MAINTAINER tenable
+MAINTAINER khulnasoft
 LABEL key="value"
 WORKDIR test
 ENV DEFAULT_TERRASEC_VERSION=1.5.1

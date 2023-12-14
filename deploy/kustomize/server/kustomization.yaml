@@ -1,0 +1,8 @@
+resources:
+  - ../base
+  - service.yaml
+
+namespace: <TERRASEC_NAMESPACE>
+
+commonLabels:
+  app: terrasec

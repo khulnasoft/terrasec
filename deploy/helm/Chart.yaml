@@ -1,0 +1,20 @@
+apiVersion: v1
+name: terrasec
+version: 1.0.0
+appVersion: v1.6.0
+description: A Helm chart for running terrasec in server mode
+icon: https://raw.githubusercontent.com/khulnasoft/terrasec/master/docs/img/terrasec-icon-white.png
+home: https://github.com/khulnasoft/terrasec
+keywords:
+  - terrasec
+  - opa
+  - security
+  - webhook
+  - validating-webhook
+  - admission-controller
+  - admission
+sources:
+  - https://github.com/khulnasoft/terrasec
+maintainers:
+  - name: terrasec
+    email: terrasec@khulnasoft.com

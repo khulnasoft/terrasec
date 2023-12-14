@@ -1,0 +1,17 @@
+resources:
+  - ../base
+  - service.yaml
+
+namespace: <TERRASEC_NAMESPACE>
+
+commonLabels:
+  app: terrasec
+
+secretGenerator:
+  - name: terrasec-certs-secret
+    files:
+      - server.key=certs/server.key
+      - server.crt=certs/server.crt
+
+patchesStrategicMerge:
+  - deployment-certs.yaml

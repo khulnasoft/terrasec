@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: terrasec
+spec:
+  template:
+    spec:
+      containers:
+      - name: terrasec-server
+        volumeMounts:
+        - mountPath: /data/certs
+          name: terrasec-certs-secret
+          readOnly: true
+        args:
+        - >
+          terrasec server --cert-path /data/certs/server.crt --key-path /data/certs/server.key -l debug -c /data/config/config.toml
+      volumes:
+      #add a secret for the tls certificates
+      - name: terrasec-certs-secret
+        secret:
+          secretName: terrasec-certs-secret

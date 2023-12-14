@@ -1,0 +1,35 @@
+terrasec_webhook_key: terrakey
+terrasec_container_image: khulnasoft/terrasec:1.16.0
+terrasec_service_type: ClusterIP
+use_debug: true
+# provide secrets for admission controller
+secrets:
+  tlsCertFilePath: ""
+  tlsKeyFilePath: ""
+cert_secret_name: terraseccerts
+ssh_secret_name: terrasecssh
+config_name: terrasecconfig
+replicas: 1
+name: terrasec
+persistence:
+  enabled: false
+  existingclaim: terrasecPvc
+webhook:
+  mode: false
+  name: webhook.terrasec.io
+  failurePolicy: Ignore
+  sideEffects: None
+  admissionReviewVersions:
+    - "v1"
+    - "v1beta1"
+  apiGroups:
+    - "apps"
+    - ""
+  resources:
+    - "deployments"
+    - "pods"
+  apiVersions:
+    - "*"
+  operations:
+    - CREATE
+    - UPDATE

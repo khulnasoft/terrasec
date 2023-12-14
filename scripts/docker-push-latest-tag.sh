@@ -5,7 +5,7 @@ set -o nounset
 set -o pipefail
 
 GIT_COMMIT=$(git rev-parse --short HEAD 2>/dev/null)
-DOCKER_REPO="tenable/terrasec"
+DOCKER_REPO="khulnasoft/terrasec"
 LATEST_TAG=$(git describe --abbrev=0 --tags)
 LATEST_TAG_SHORT=$(echo "${LATEST_TAG//v}")
 
