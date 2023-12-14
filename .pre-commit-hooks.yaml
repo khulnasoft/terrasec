@@ -1,0 +1,5 @@
+- id: terraform-pre-commit   
+  name: terrasec
+  description: Runs terrasec on supported IaC templates.
+  language: script
+  entry: scripts/pre-commit-hook.sh  
