@@ -4,7 +4,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-DOCKER_REPO="docker-terrasec-local.artifactory.eng.khulnasoft.com/terrasec"
+DOCKER_REPO="khulnasoft/terrasec"
 DOCKERFILE="./build/Dockerfile"
 
 if [ $# -eq 0 ]; then

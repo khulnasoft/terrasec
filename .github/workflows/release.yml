@@ -39,7 +39,7 @@ jobs:
       - uses: docker/setup-qemu-action@v2
 
       - name: Login to Artifactory
-        run: docker login --username svc_terrasec --password ${{ secrets.ARTIFACTORY_API_TOKEN }}  https://docker-terrasec-local.artifactory.eng.khulnasoft.com
+        run: docker login --username svc_terrasec --password ${{ secrets.ARTIFACTORY_API_TOKEN }}  https://khulnasoft
 
       - name: Build Terrasec latest tag docker image
         run: make docker-build-push-latest-tag
@@ -47,12 +47,12 @@ jobs:
           MULTIPLATFORM: true
 
       - name: Pull latest Image
-        run:  docker pull docker-terrasec-local.artifactory.eng.khulnasoft.com/tenb-cb:latest
+        run:  docker pull khulnasoft/tenb-cb:latest
 
       - name: Run scan on terrasec image
         run: |
           image_tag=$(<dockerhub-image-label.txt)
-          docker run -e JKN_USERNAME=${{ secrets.JKN_USERNAME }} -e JKN_PASSWORD=${{ secrets.JKN_PASSWORD }} -t docker-terrasec-local.artifactory.eng.khulnasoft.com/tenb-cb:latest jobs execute-job  --credential-mode env -n teams-deleng-terraform -p deleng-terraform/dockerhub-publish -d "{\"APPID\":\"2054\", \"IMAGE\":\"docker-terrasec-local.artifactory.eng.khulnasoft.com/terrasec:${image_tag}\", \"TARGETS\": \"khulnasoft/terrasec:${image_tag},khulnasoft/terrasec:latest\", \"MULTIARCH\":\"true\"}" --cloudflare-access-secret ${{ secrets.CF_ACCESS_TOKEN }}:${{ secrets.CF_SECRET }}
+          docker run -e JKN_USERNAME=${{ secrets.JKN_USERNAME }} -e JKN_PASSWORD=${{ secrets.JKN_PASSWORD }} -t khulnasoft/tenb-cb:latest jobs execute-job  --credential-mode env -n teams-deleng-terraform -p deleng-terraform/dockerhub-publish -d "{\"APPID\":\"2054\", \"IMAGE\":\"khulnasoft/terrasec:${image_tag}\", \"TARGETS\": \"khulnasoft/terrasec:${image_tag},khulnasoft/terrasec:latest\", \"MULTIARCH\":\"true\"}" --cloudflare-access-secret ${{ secrets.CF_ACCESS_TOKEN }}:${{ secrets.CF_SECRET }}
 
       - name: Build terrasec_atlantis docker image
         run: make atlantis-docker-build
@@ -60,4 +60,4 @@ jobs:
       - name: Run scan on terrasec_atlantis image 
         run: |
           image_tag=$(<dockerhub-image-label.txt)
-          docker run -e JKN_USERNAME=${{ secrets.JKN_USERNAME }} -e JKN_PASSWORD=${{ secrets.JKN_PASSWORD }} -t docker-terrasec-local.artifactory.eng.khulnasoft.com/tenb-cb:latest jobs execute-job  --credential-mode env -n teams-deleng-terraform -p deleng-terraform/dockerhub-publish -d "{\"APPID\":\"test\", \"IMAGE\":\"docker-terrasec-local.artifactory.eng.khulnasoft.com/terrasec_atlantis:${image_tag}\", \"TARGETS\": \"khulnasoft/terrasec_atlantis:${image_tag}\", \"MULTIARCH\":\"true\"}" --cloudflare-access-secret ${{ secrets.CF_ACCESS_TOKEN }}:${{ secrets.CF_SECRET }}
+          docker run -e JKN_USERNAME=${{ secrets.JKN_USERNAME }} -e JKN_PASSWORD=${{ secrets.JKN_PASSWORD }} -t khulnasoft/tenb-cb:latest jobs execute-job  --credential-mode env -n teams-deleng-terraform -p deleng-terraform/dockerhub-publish -d "{\"APPID\":\"test\", \"IMAGE\":\"khulnasoft/terrasec_atlantis:${image_tag}\", \"TARGETS\": \"khulnasoft/terrasec_atlantis:${image_tag}\", \"MULTIARCH\":\"true\"}" --cloudflare-access-secret ${{ secrets.CF_ACCESS_TOKEN }}:${{ secrets.CF_SECRET }}

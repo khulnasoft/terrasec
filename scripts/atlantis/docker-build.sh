@@ -5,7 +5,7 @@ set -o nounset
 set -o pipefail
 
 GIT_COMMIT=$(git rev-parse --short HEAD 2>/dev/null)
-DOCKER_REPO="docker-terrasec-local.artifactory.eng.khulnasoft.com/terrasec_atlantis"
+DOCKER_REPO="khulnasoft/terrasec_atlantis"
 DIR="./integrations/atlantis"
 
 docker build -t ${DOCKER_REPO}:${GIT_COMMIT} ${DIR}

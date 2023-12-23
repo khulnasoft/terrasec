@@ -2,8 +2,6 @@ package tools
 
 import (
 	// used only for testing
-	_ "github.com/onsi/ginkgo/ginkgo"
-	// used only for testing
 	_ "github.com/onsi/gomega"
 )
 

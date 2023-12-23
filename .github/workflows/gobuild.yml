@@ -69,7 +69,7 @@ jobs:
       - uses: docker/setup-qemu-action@v2
 
       - name: Login to Artifactory
-        run: docker login --username svc_terrasec --password ${{ secrets.ARTIFACTORY_API_TOKEN }}  https://docker-terrasec-local.artifactory.eng.khulnasoft.com
+        run: docker login --username svc_terrasec --password ${{ secrets.ARTIFACTORY_API_TOKEN }}  https://khulnasoft
 
       - name: Build latest docker image
         run: make docker-build-push-latest
@@ -77,9 +77,9 @@ jobs:
           MULTIPLATFORM: true
 
       - name: Pull Image
-        run:  docker pull docker-terrasec-local.artifactory.eng.khulnasoft.com/tenb-cb:latest
+        run:  docker pull khulnasoft/tenb-cb:latest
 
       - name: Run scan
         run: |
           image_tag=$(<dockerhub-image-label.txt)
-          docker run -e JKN_USERNAME=${{ secrets.JKN_USERNAME }} -e JKN_PASSWORD=${{ secrets.JKN_PASSWORD }} -t docker-terrasec-local.artifactory.eng.khulnasoft.com/tenb-cb:latest jobs execute-job  --credential-mode env -n teams-deleng-terraform -p deleng-terraform/dockerhub-publish -d "{\"APPID\":\"2054\", \"IMAGE\":\"docker-terrasec-local.artifactory.eng.khulnasoft.com/terrasec:${image_tag}\", \"TARGETS\": \"khulnasoft/terrasec:latest\", \"MULTIARCH\":\"true\"}" --cloudflare-access-secret ${{ secrets.CF_ACCESS_TOKEN }}:${{ secrets.CF_SECRET }}
+          docker run -e JKN_USERNAME=${{ secrets.JKN_USERNAME }} -e JKN_PASSWORD=${{ secrets.JKN_PASSWORD }} -t khulnasoft/tenb-cb:latest jobs execute-job  --credential-mode env -n teams-deleng-terraform -p deleng-terraform/dockerhub-publish -d "{\"APPID\":\"2054\", \"IMAGE\":\"khulnasoft/terrasec:${image_tag}\", \"TARGETS\": \"khulnasoft/terrasec:latest\", \"MULTIARCH\":\"true\"}" --cloudflare-access-secret ${{ secrets.CF_ACCESS_TOKEN }}:${{ secrets.CF_SECRET }}
