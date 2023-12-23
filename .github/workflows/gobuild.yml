@@ -68,8 +68,11 @@ jobs:
 
       - uses: docker/setup-qemu-action@v2
 
-      - name: Login to Artifactory
-        run: docker login --username svc_terrasec --password ${{ secrets.ARTIFACTORY_API_TOKEN }}  https://khulnasoft
+      - name: Login to docker.io registry
+        uses: docker/login-action@v2.2.0
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build latest docker image
         run: make docker-build-push-latest
